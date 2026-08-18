@@ -38,7 +38,7 @@
 ## 启动与验证
 
 ```bash
-cd /Users/cui/Desktop/xiamen-mahjong-ai-120
+cd /Users/cui/Desktop/xiamen-majiang-ai-120
 python3 -m unittest discover -s tests -v
 python3 scripts/serve_web_game.py
 ```

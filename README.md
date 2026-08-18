@@ -1,4 +1,4 @@
-# xiamen-mahjong-ai-120
+# xiamen-majiang-ai-120
 
 120 张“新厦麻”的独立规则、算法与网页验证项目。它不是 144 张老厦麻的配置档，
 也不会在运行时切换到 144 张规则。
@@ -17,7 +17,7 @@
 只依赖 Python 标准库：
 
 ```bash
-cd /Users/cui/Desktop/xiamen-mahjong-ai-120
+cd /Users/cui/Desktop/xiamen-majiang-ai-120
 python3 scripts/serve_web_game.py
 ```
 
