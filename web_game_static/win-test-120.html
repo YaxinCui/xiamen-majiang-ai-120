@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#082f28" />
+    <meta name="description" content="120 张厦门麻将真实规则验牌桌：用固定牌面调用实战共用的后端胡牌代码。" />
+    <title>120 张厦门麻将 · 真实规则验牌桌</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/win-test-120.css" />
+  </head>
+  <body class="win-test-page">
+    <main class="win-test-shell">
+      <nav class="win-test-nav" aria-label="页面导航">
+        <a href="/games-120.html">← 返回游戏大厅</a>
+        <a href="/scenarios-120.html">查看教学模拟</a>
+      </nav>
+
+      <header class="win-test-hero">
+        <div>
+          <p class="eyebrow">120 TILES · REAL ENGINE CHECK</p>
+          <h1>真实规则<span>验牌桌</span></h1>
+          <p>牌面是为了复现问题而预设的，但“能不能胡”和返回牌型不会写死。每次摸牌都会请求后端，并经过实战牌局共用的判胡函数。</p>
+        </div>
+        <div class="engine-live-badge"><i></i><strong>后端实时判断</strong><span>不是前端模拟结论</span></div>
+      </header>
+
+      <section class="win-test-layout">
+        <aside class="win-case-picker" aria-label="选择验牌用例">
+          <p class="section-kicker">选择真实测试</p>
+          <div id="win-case-buttons"></div>
+          <div class="win-case-note">
+            <b>如何判断是否实现</b>
+            <p>绿色表示后端结果符合预期；黄色表示只实现基础胡牌，尚未识别附加牌型；红色才是胡牌结果错误。</p>
+          </div>
+        </aside>
+
+        <article class="win-engine-stage" aria-live="polite">
+          <header class="win-stage-heading">
+            <div><p id="win-case-kicker" class="section-kicker"></p><h2 id="win-case-title"></h2></div>
+            <button id="win-case-reset" class="win-reset" type="button">恢复摸牌前</button>
+          </header>
+          <p id="win-case-summary" class="win-case-summary"></p>
+
+          <section class="engine-proof" aria-label="真实调用链">
+            <span><b>页面请求</b><code>POST /api/rules-120/check-win</code></span>
+            <i>→</i>
+            <span><b>实战共用入口</b><code>evaluate_winning_tiles()</code></span>
+            <i>→</i>
+            <span><b>牌形求解器</b><code>is_winning_hand()</code></span>
+          </section>
+
+          <section class="real-test-table" aria-label="真实验牌桌牌面">
+            <div class="test-opponent test-opponent-top"><b>北家</b><span>旁观测试</span><div class="mini-backs"></div></div>
+            <div class="test-opponent test-opponent-left"><b>西家</b><span>旁观测试</span><div class="mini-backs"></div></div>
+            <div class="test-opponent test-opponent-right"><b>南家</b><span>旁观测试</span><div class="mini-backs"></div></div>
+            <div class="test-table-center">
+              <span>本局真金</span>
+              <div id="win-gold-tile"></div>
+              <small>牌墙剩余 42 张</small>
+            </div>
+            <div class="test-player-area">
+              <div class="test-player-meta"><strong>东家 · 测试主人公</strong><span id="win-hand-count">摸牌前 16 张</span></div>
+              <div id="win-test-hand" class="win-test-hand"></div>
+              <div class="draw-slot"><b>下一张固定摸牌</b><div id="win-draw-tile"></div></div>
+            </div>
+          </section>
+
+          <section class="real-check-action">
+            <div><span id="win-request-state">尚未请求后端</span><strong id="win-action-title">等待主人公摸牌</strong><p id="win-action-detail"></p></div>
+            <button id="run-real-win-check" class="primary-button" type="button">摸牌并调用真实判胡</button>
+          </section>
+
+          <section id="win-engine-result" class="win-engine-result is-idle">
+            <header><div><span id="win-verdict-chip">等待验证</span><h3 id="win-verdict-title">后端尚未返回结果</h3></div><strong id="win-actual-result">—</strong></header>
+            <p id="win-verdict-detail">点击上方按钮后，这里会显示真实规则代码的返回值。</p>
+            <ol id="win-engine-checks"></ol>
+            <details>
+              <summary>查看本次 API 请求与响应</summary>
+              <pre id="win-api-trace"></pre>
+            </details>
+          </section>
+        </article>
+      </section>
+    </main>
+
+    <script src="/tile-ui.js" defer></script>
+    <script src="/win-test-120.js" defer></script>
+  </body>
+</html>

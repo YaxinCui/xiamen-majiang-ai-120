@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#082f28" />
+    <meta name="description" content="120 张厦门麻将规则情景实验室：逐步演示碰碰胡、清一色、补花、杠上花、抢金、三金倒和双游。" />
+    <title>120 张厦门麻将 · 规则情景实验室</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/scenarios-120.css" />
+  </head>
+  <body class="scenario-page">
+    <main class="scenario-shell">
+      <nav class="scenario-nav" aria-label="页面导航">
+        <a href="/games-120.html">← 返回游戏大厅</a>
+        <a href="/win-test-120.html">真实规则验牌</a>
+        <a href="/rules-120.html">查看完整规则</a>
+      </nav>
+
+      <header class="scenario-hero">
+        <div>
+          <p class="eyebrow">120 TILES · RULE SCENARIO LAB</p>
+          <h1>规则情景<span>实验室</span></h1>
+          <p>不洗牌、不等待，直接把牌局放到关键一刻。点击一次只推进一个规则步骤，方便逐条核对程序判断。</p>
+        </div>
+        <div class="scenario-hero-badge" aria-hidden="true"><strong>7</strong><span>个可操作牌例</span></div>
+      </header>
+
+      <section class="scenario-layout">
+        <aside class="scenario-picker" aria-label="选择演示情景">
+          <p class="section-kicker">选择情景</p>
+          <button class="is-active" type="button" data-scenario="pong">
+            <span>01</span><strong>碰碰胡</strong><small>摸牌后组成五刻一对</small>
+          </button>
+          <button type="button" data-scenario="clean-suit">
+            <span>02</span><strong>清一色</strong><small>全副牌只有一种花色</small>
+          </button>
+          <button type="button" data-scenario="flower">
+            <span>03</span><strong>摸花补牌</strong><small>花牌亮出，再从牌尾补一张</small>
+          </button>
+          <button type="button" data-scenario="kong-blossom">
+            <span>04</span><strong>杠上花</strong><small>开杠后补牌正好自摸</small>
+          </button>
+          <button type="button" data-scenario="gold-capture">
+            <span>05</span><strong>抢金</strong><small>开金直接完成起手听牌</small>
+          </button>
+          <button type="button" data-scenario="three-gold">
+            <span>06</span><strong>起手三金倒</strong><small>开金时手中已有三金</small>
+          </button>
+          <button type="button" data-scenario="double-tour">
+            <span>07</span><strong>双游两轮</strong><small>连续模拟两次回摸</small>
+          </button>
+          <div class="scenario-picker-note">
+            <b>怎么使用</b>
+            <p>黄色描边是刚摸到或本步骤处理的牌；绿色结果框表示条件已经成立。</p>
+          </div>
+        </aside>
+
+        <article class="scenario-stage" aria-live="polite">
+          <header class="scenario-stage-heading">
+            <div><p id="scenario-kicker" class="section-kicker"></p><h2 id="scenario-title"></h2></div>
+            <button id="scenario-reset" class="scenario-reset" type="button">重新演示</button>
+          </header>
+          <p id="scenario-summary" class="scenario-summary"></p>
+
+          <div class="scenario-table">
+            <div class="scenario-opponents" aria-label="其余三家状态">
+              <span data-opponent="south"><b>南家</b><small>等待</small></span>
+              <span data-opponent="west"><b>西家</b><small>等待</small></span>
+              <span data-opponent="north"><b>北家</b><small>等待</small></span>
+            </div>
+            <section id="scenario-scene" class="scenario-scene"></section>
+          </div>
+
+          <section class="scenario-action-card">
+            <div class="scenario-message-wrap">
+              <span id="scenario-step-badge">准备</span>
+              <div><strong id="scenario-message"></strong><p id="scenario-detail"></p></div>
+            </div>
+            <button id="scenario-next" class="primary-button scenario-next" type="button"></button>
+          </section>
+
+          <ol id="scenario-timeline" class="scenario-timeline" aria-label="情景步骤"></ol>
+        </article>
+      </section>
+
+      <section class="scenario-rule-note">
+        <div><p class="section-kicker">规则边界</p><h2>牌形成立，不等于所有牌桌都额外加分</h2></div>
+        <p><b>碰碰胡、清一色</b>在这里先验证合法牌形，是否另算分由房间开关决定；<b>补花、抢金、起手三金倒、双游</b>按当前 120 张玩法演示。杠上花示例不含真金，避免把“有金限制”和杠补流程混在一起。</p>
+      </section>
+
+      <section class="scenario-research-grid" aria-label="附加牌型调研结论">
+        <article class="research-card is-available"><span>可演示 · 房规计分</span><h3>清一色、碰碰胡</h3><p>牌形定义明确，当前页面可以识别；厦门各桌是否另加固定分尚无统一口径。</p></article>
+        <article class="research-card is-configurable"><span>暂列房规</span><h3>全求人、一条龙、门清、海底</h3><p>这些是其他麻将中常见的附加牌型或和牌方式，目前没有足够证据证明新厦麻统一计分。</p></article>
+        <article class="research-card is-configurable"><span>需先定义白板</span><h3>混一色</h3><p>120 张玩法没有风牌、中、发，白板又可能固定替代金牌原面；因此不能直接套用“单一花色＋字牌”的通用定义。</p></article>
+      </section>
+    </main>
+
+    <template id="scenario-tile-template"><span class="tile scenario-tile"></span></template>
+    <script src="/scenarios-120.js" defer></script>
+  </body>
+</html>

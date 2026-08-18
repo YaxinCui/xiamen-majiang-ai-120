@@ -1,0 +1,166 @@
+<style>
+  #double-tour-mahjong {
+    color: var(--foreground);
+    width: 100%;
+  }
+  #double-tour-mahjong h2 {
+    margin: 0 0 8px;
+  }
+  #double-tour-mahjong .dt-subtitle {
+    margin: 0 0 20px;
+    color: var(--muted-foreground);
+  }
+  #double-tour-mahjong .dt-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+  }
+  #double-tour-mahjong .dt-step {
+    min-width: 0;
+    text-align: center;
+  }
+  #double-tour-mahjong .dt-number {
+    color: var(--muted-foreground);
+    display: block;
+    margin-bottom: 5px;
+  }
+  #double-tour-mahjong .dt-step strong {
+    display: block;
+    margin-bottom: 12px;
+  }
+  #double-tour-mahjong .dt-arrow {
+    color: var(--muted-foreground);
+    text-align: center;
+  }
+  #double-tour-mahjong .dt-arrow b {
+    color: var(--foreground);
+    display: block;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  #double-tour-mahjong .dt-hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    min-height: 76px;
+    align-content: center;
+  }
+  #double-tour-mahjong .dt-tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--card-foreground);
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 58px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--border) 75%, transparent);
+  }
+  #double-tour-mahjong .dt-tile small {
+    color: inherit;
+    margin-top: 1px;
+  }
+  #double-tour-mahjong .dt-group-end {
+    margin-right: 7px;
+  }
+  #double-tour-mahjong .dt-gold {
+    background: color-mix(in srgb, var(--yellow) 28%, var(--card));
+    border: 2px solid var(--yellow);
+    color: var(--foreground);
+  }
+  #double-tour-mahjong .dt-drawn {
+    border: 2px solid var(--viz-series-1);
+    color: var(--foreground);
+  }
+  #double-tour-mahjong .dt-discard {
+    position: relative;
+    transform: rotate(8deg) translateY(5px);
+    opacity: .8;
+  }
+  #double-tour-mahjong .dt-discard::after {
+    content: "打出";
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--muted-foreground);
+    white-space: nowrap;
+  }
+  #double-tour-mahjong .dt-note {
+    color: var(--muted-foreground);
+    margin: 12px 0 0;
+  }
+  #double-tour-mahjong .dt-result {
+    color: var(--green);
+  }
+  #double-tour-mahjong .dt-caption {
+    border-top: 1px solid var(--border);
+    margin-top: 22px;
+    padding-top: 14px;
+    text-align: center;
+  }
+  #double-tour-mahjong .dt-caption strong {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+  @media (max-width: 700px) {
+    #double-tour-mahjong .dt-stage {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    #double-tour-mahjong .dt-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>
+
+<section id="double-tour-mahjong" aria-labelledby="dt-title">
+  <h2 id="dt-title">用麻将牌面看懂“双游”</h2>
+  <p class="dt-subtitle">示意牌只保留关键牌组：黄色边框是真金，蓝色边框是本轮摸到的牌。</p>
+
+  <div class="dt-stage">
+    <article class="dt-step">
+      <span class="dt-number">第一步</span>
+      <strong>先进入一游</strong>
+      <div class="dt-hand" aria-label="四组已经完成，一万二万等待三万，另有两张真金">
+        <span class="dt-tile">一<small>萬</small></span><span class="dt-tile dt-group-end">二<small>萬</small></span>
+        <span class="dt-tile">二<small>筒</small></span><span class="dt-tile">三<small>筒</small></span><span class="dt-tile dt-group-end">四<small>筒</small></span>
+        <span class="dt-tile dt-gold">金</span><span class="dt-tile dt-gold">金</span>
+      </div>
+      <p class="dt-note">其中一张金暂代三万，另一张金作为游金单钓。</p>
+    </article>
+
+    <div class="dt-arrow" aria-hidden="true"><b>摸到三万</b>→</div>
+
+    <article class="dt-step">
+      <span class="dt-number">第二步</span>
+      <strong>真牌补回缺口</strong>
+      <div class="dt-hand" aria-label="摸到三万后，一万二万三万组成顺子，两张真金均被释放">
+        <span class="dt-tile">一<small>萬</small></span><span class="dt-tile">二<small>萬</small></span><span class="dt-tile dt-drawn dt-group-end">三<small>萬</small></span>
+        <span class="dt-tile">二<small>筒</small></span><span class="dt-tile">三<small>筒</small></span><span class="dt-tile dt-group-end">四<small>筒</small></span>
+        <span class="dt-tile dt-gold">金</span><span class="dt-tile dt-gold">金</span>
+      </div>
+      <p class="dt-note">三万接替原来由金代替的位置，两张金都空出来。</p>
+    </article>
+
+    <div class="dt-arrow" aria-hidden="true"><b>打一张金</b>→</div>
+
+    <article class="dt-step">
+      <span class="dt-number">第三步</span>
+      <strong class="dt-result">升级双游</strong>
+      <div class="dt-hand" aria-label="打出一张真金，手中保留一张真金单钓，进入双游封闭摸牌圈">
+        <span class="dt-tile">一<small>萬</small></span><span class="dt-tile">二<small>萬</small></span><span class="dt-tile dt-group-end">三<small>萬</small></span>
+        <span class="dt-tile">二<small>筒</small></span><span class="dt-tile">三<small>筒</small></span><span class="dt-tile dt-group-end">四<small>筒</small></span>
+        <span class="dt-tile dt-gold">金</span><span class="dt-tile dt-gold dt-discard">金</span>
+      </div>
+      <p class="dt-note">手中仍留一张金单钓；打出的金不可被吃、碰、杠或胡。</p>
+    </article>
+  </div>
+
+  <p class="dt-caption"><strong>视觉重点：</strong>双游 = 一游后摸到真实补牌，释放额外真金，再打出一张金升级；不是“手里有两张金就立即双游”。</p>
+</section>
